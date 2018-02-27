@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+	
+	<html>
+
+		<head>
+
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+      
+      		<link rel="stylesheet" type="text/css" href="Style.css">
+
+		</head>
+
+		<body>
+
+			<div class="header">
+  
+        		<a href="WelcomePage.html" class="logo"> <img src="logo.jpg" width="30px" height="30px"> </a>
+
+      			<div class="header-right">
+      				    
+      				<div class="dropdown">
+				    
+					    <button class="dropbtn"> Hello User! 
+					      
+					      <i class="fa fa-caret-down"></i>
+					    
+					    </button>
+					    
+					    <div class="dropdown-content">
+					    
+					      <a href="editProfile.html">Edit Profile</a>
+					    
+					      <a href="WelcomePage.html">Delete Account</a>
+					    
+					      <a href="WelcomePage.html">Sign Out</a>
+					    
+					    </div>
+					  
+					  </div> 
+
+ 				</div>
+		        
+		        <div class="header-left">
+		   
+		          	<a class="active" href="WelcomePage.html">Home</a>
+		        
+		          	<a href="DepartmentPage.html">Departments</a>
+
+		         	<a href="Donate.html">Donate</a>
+
+          			<a href="location.html">Location</a>
+
+		          	<a href="contactus.html">Contact Us</a>
+
+		        </div>
+		      
+		    </div>
+
+
+		    <div class="profile">
+
+				<div class="info">
+								    			    
+				    <p>First Name </p>
+
+				    <input type="text" name="fn" value="First Name">
+				    				    
+				    <p>Middle Name </p>
+
+				    <input type="text" name="mn" value="Middle Name">
+
+				    <p>Last Name</p>
+
+				    <input type="text" name="ln" value="Last Name">
+
+				    <p>Gender </p>
+
+				     <input type="radio" name="gender" value="male"> Male<br>
+  
+  					<input type="radio" name="gender" value="female"> Female<br>
+  
+  					<input type="radio" name="gender" value="other"> Other
+				    
+				    <p>Phone Number </p>
+
+				    <input type="text" name="pn" value="Phone Number">
+
+				    <p>Address</p>
+
+				    <input type="text" name="adrs" value="Address">
+
+				    <p>Username</p>
+
+				    <input type="text" name="un" value="Username">
+
+				    <p>Social Number</p>
+
+				    <input type="text" name="sn" value="Social Number">
+				    
+				    <p>Birth Date </p>
+
+				    <div class="container">
+				        
+				        <div class="controls">
+				        
+				            <p class="next label" onclick="nextMonth()"><i class="fa fa-arrow-right"></i></p>
+				        
+				            <p class="previous label" onclick="previousMonth()"><i class="fa fa-arrow-left"></i></p>
+				        
+				            <p id="current-month" class="label bold">January</p>
+				        
+				        </div>
+
+				        <div class="calendar" id="calendar">
+				    				        
+				        </div>
+				    
+				    </div>
+
+				    <p>Emergency Contact</p>
+
+				    <input type="text" name="pn" value="Phone Number">
+
+				</div>    
+
+				<input class="savepro" type="submit" name="Save">
+
+			</div>   
+
+			<script>
+				
+				// Globally head date object for the month shown
+				
+				var date = new Date();
+				
+				date.setDate(1);
+				
+				date.setMonth(0);
+
+				window.onload = function() 
+
+				{
+				
+				    // Add the current month on load
+				
+				    createMonth();
+				
+				};
+
+				document.onkeydown = function(evt) 
+
+				{
+				
+				    evt = evt || window.event;
+				   
+				    switch (evt.keyCode) 
+
+				    {
+				    
+				        case 37:
+				    
+				            previousMonth();
+				    
+				            break;
+				    
+				        case 39:
+				    
+				            nextMonth();
+				    
+				            break;
+				    
+				    }
+				
+				};
+
+				// Converts day ids to the relevant string
+				
+				function dayOfWeekAsString(dayIndex) 
+
+				{
+				        
+				    return ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][dayIndex];
+				}
+				    
+				// Converts month ids to the relevant string
+				
+				function monthsAsString(monthIndex) 
+
+				{
+				
+				    return ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][monthIndex];
+				
+				}
+
+				// Creates a day element
+				
+				function createCalendarDay(num, day, mon, year) 
+
+				{
+				
+				    var currentCalendar = document.getElementById("calendar");
+
+				    var newDay = document.createElement("div");
+				
+				    var date = document.createElement("p");
+				
+				    var dayElement = document.createElement("p");
+
+				    date.innerHTML = num;
+				
+				    dayElement.innerHTML = day;
+
+				    newDay.className = "calendar-day ";
+
+				    // Set ID of element as date formatted "8-January" etc 
+				
+				    newDay.id = num + "-" + mon + "-" +year;
+
+				    newDay.appendChild(date);
+				
+				    newDay.appendChild(dayElement);
+				
+				    currentCalendar.appendChild(newDay);
+				
+				}
+
+				// Clears all days from the calendar
+				
+				function clearCalendar() 
+
+				{
+				
+				    var currentCalendar = document.getElementById("calendar");
+
+				    currentCalendar.innerHTML = "";
+
+				}
+
+				// Clears the calendar and shows the next month
+				
+				function nextMonth() 
+
+				{
+				
+				    clearCalendar();
+
+				    date.setMonth(date.getMonth() + 1);
+
+				    createMonth(date.getMonth());
+				
+				}
+
+				// Clears the calendar and shows the previous month
+				
+				function previousMonth() 
+
+				{
+				
+				    clearCalendar();
+				
+				    date.setMonth(date.getMonth() - 1);
+				
+				    var val = date.getMonth();
+				
+				    createMonth(date.getMonth());
+				
+				}
+
+				// Creates and populates all of the days to make up the month
+				
+				function createMonth() 
+
+				{
+				
+				    var currentCalendar = document.getElementById("calendar");
+
+				    var dateObject = new Date();
+				
+				    dateObject.setDate(date.getDate());
+				
+				    dateObject.setMonth(date.getMonth());
+				
+				    dateObject.setYear(date.getFullYear());
+
+				    createCalendarDay(dateObject.getDate(), dayOfWeekAsString(dateObject.getDay()), monthsAsString(dateObject.getMonth()), dateObject.getFullYear());
+
+				    dateObject.setDate(dateObject.getDate() + 1);
+
+				    while (dateObject.getDate() != 1) 
+
+				    {
+				    
+				        createCalendarDay(dateObject.getDate(), dayOfWeekAsString(dateObject.getDay()), monthsAsString(dateObject.getMonth()), dateObject.getFullYear());
+				    
+				        dateObject.setDate(dateObject.getDate() + 1);
+				    
+				    }
+
+				    // Set the text to the correct month
+				    
+				    var currentMonthText = document.getElementById("current-month");
+				    
+				    currentMonthText.innerHTML = monthsAsString(date.getMonth()) + " " + date.getFullYear();
+
+				    getCurrentDay();
+				
+				}
+
+
+				function getCurrentDay() 
+
+				{
+
+				    // Create a new date that will set as default time
+				
+				    var todaysDate = new Date();
+				
+				    var today = todaysDate.getDate();
+				
+				    var currentMonth = todaysDate.getMonth();
+				
+				    var currentYear = todaysDate.getFullYear();
+				
+				    var thisMonth = monthsAsString(currentMonth);
+				
+				    // Find element with the ID for today
+				
+				    currentDay = document.getElementById(today + "-" + thisMonth + "-" + currentYear);
+				
+				    currentDay.className = "calendar-day today";
+				
+				}
+
+			</script>     
+				            
+		</body>
+
+	</html>

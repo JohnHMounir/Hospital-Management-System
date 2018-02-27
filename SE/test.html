@@ -1,0 +1,137 @@
+<div class="regForm" id="regForm">
+                                 
+                <!-- One "tab" for each step in the form: -->
+               
+                <div class="tab">
+
+                  <h1>Report Type Name</h1>
+               
+                  <p><input placeholder="Report type name..." oninput="this.className = ''" name="tname"></p>               
+                </div>
+               
+                <div id="ContentDiv" class="tab">
+
+                  <h1>Report Type Design</h1>
+                                 
+                  <p> 
+
+                    <input id="labelvalue" placeholder="Label Text"> 
+
+                    <button type="button" id="addBtn" onclick="AddLabel()">  Add Label </button>
+
+                    <button type="button" id="addBtn" onclick="AddInput()">  Add Input </button>
+
+                  </p>
+
+                  <p> 
+
+                    <input id="HeaderValue" placeholder="Header Text"> 
+
+                    <button type="button" id="addBtn" onclick="AddHeader()">  Add Header </button>
+
+                  </p>
+               
+                </div>
+               
+                <div class="tab">
+
+                  <h1>Report Type Desgin</h1>
+               
+                  <div id="mydiv">
+                    
+                  
+                  </div>
+
+                </div>
+
+                <div style="overflow:auto;">
+
+                  <div style="float:right;">
+                  
+                    <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+
+                   
+                  
+                    <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                  
+                  </div>
+                
+                </div>
+                
+                <!-- Circles which indicates the steps of the form: -->
+                
+                <div style="text-align:center;margin-top:40px;">
+                
+                  <span class="step"></span>
+                
+                  <span class="step"></span>
+                
+                  <span class="step"></span>
+                
+                  <span class="step"></span>
+                
+                </div>      
+            
+            </div>
+
+            <script>
+
+              function AddBreak()
+
+        {
+
+          var node = document.createElement("br")
+
+          document.getElementById("mydiv").appendChild(node);
+
+        }
+
+        function AddLabel()
+
+        {
+
+          var node = document.createElement("label");            
+
+          var x = document.getElementById("labelvalue").value;
+         
+          var textnode = document.createTextNode(x);       
+         
+          node.appendChild(textnode);                              
+         
+          document.getElementById("mydiv").appendChild(node); 
+
+        }
+
+
+        function AddInput()
+
+        {
+            
+          var node = document.createElement("input");
+          
+          document.getElementById("mydiv").appendChild(node);    
+
+          AddBreak();
+
+        }
+
+        function AddHeader()
+
+        {
+
+          var node = document.createElement("h3");            
+
+          var x = document.getElementById("HeaderValue").value;
+         
+          var textnode = document.createTextNode(x);       
+         
+          node.appendChild(textnode);                              
+         
+          document.getElementById("mydiv").appendChild(node); 
+
+          AddBreak();
+
+        }
+
+            </script>
+          
